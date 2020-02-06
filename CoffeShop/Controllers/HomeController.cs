@@ -35,6 +35,14 @@ namespace CoffeShop.Controllers
             return PartialView("~/Views/Home/Partial/SizeDropDown.cshtml", coffeList);
         }
 
+        public async Task<IActionResult> GetOrderDetail(decimal milkNeed, 
+            decimal coffeNeed,decimal waterNeed,bool milkCheck,bool coffeCheck,bool waterCheck)
+        {
+            ComponentServiceHelper componentService = new ComponentServiceHelper();
+            var response = await componentService.GetOrderAsync(milkNeed,coffeNeed,waterNeed,milkCheck,coffeCheck,waterCheck);
+            return Json(response);
+        }
+
         public IActionResult Privacy()
         {
             return View();
