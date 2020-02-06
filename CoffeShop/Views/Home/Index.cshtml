@@ -1,58 +1,95 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Coffe</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                        <small id="emailHelp" class="form-text text-muted">Please select your coffe</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Coffe Size</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Add extra one unite Milk</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Add extra one unite Coffe</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Add extra one unite Water</label>
-                    </div>
-                    Total Price:<b>12 TL</b><br />
-                    <button type="submit" class="btn btn-primary" style="margin-top:20px">Submit</button>
-                </form>
-            </div>
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-                Coffe in stock:<b>20</b><br />
-                Milk in stock:<b>20</b><br />
-                Water in stock:<b>20</b><br />
-
-            </div>
+@model List<CoffeShop.Data.Models.DataModels.Coffe>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form>
+                <div class="form-group">
+                    <label>Coffe</label>
+                    <select class="form-control" id="coffeDropDown" onchange="GetCoffeSizes()">
+                        @{
+                            <option value="0">Please Select Your Coffe</option>
+                            foreach (var items in Model)
+                            {
+                                <option value="@items.Id">@items.Name</option>
+                            }
+                        }
+                    </select>
+                    <small id="infoCoffe" class="form-text text-muted">Please select your coffe</small>
+                </div>
+                <div id="divCoffeSize">
+                    @{
+                        await Html.PartialAsync("~/Views/Home/Partial/SizeDropDown.cshtml",new List<CoffeShop.Data.Models.ViewModel.Coffe_CoffeSize_View>());
+                    }
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="checkBoxMilk">
+                    <label class="form-check-label" for="checkBoxMilk">Add extra one unite Milk</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="checkBoxCoffe">
+                    <label class="form-check-label" for="checkBoxCoffe">Add extra one unite Coffe</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="checkBoxWater">
+                    <label class="form-check-label" for="checkBoxWater">Add extra one unite Water</label>
+                </div>
+                Total Price:<span id="priceLbl"><b>12 TL</b></span><br />
+                <button type="submit" class="btn btn-primary" style="margin-top:20px">Submit</button>
+            </form>
         </div>
-        
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4">
+            Coffe in stock:<b>20</b><br />
+            Milk in stock:<b>20</b><br />
+            Water in stock:<b>20</b><br />
+
+        </div>
     </div>
-  
+
+</div>
+<script>
+    function GetCoffeSizes() {
+        let selectedValue = $('select[id=coffeDropDown]').val();
+        $.ajax({
+                url : '/Home/GetCoffeSizes',
+                type: 'GET',
+                data: {
+                    coffeId: selectedValue
+                },
+                success: function (response) {
+                    let refreshDiv = document.getElementById("divCoffeSize")
+                    refreshDiv.innerHTML = response;
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+
+                }
+            });
+    }
+
+
+    function UpdateNeeds() {
+        let milkneed = $("#coffeSizeDropDown").find(':selected').attr('milkneed');
+        let waterneed = $("#coffeSizeDropDown").find(':selected').attr('waterneed');
+        let coffeneed = $("#coffeSizeDropDown").find(':selected').attr('coffeneed');
+
+                    debugger;
+
+        if (milkneed != null) {
+            document.getElementById("milkNeed").innerHTML = "Milk need: " + milkneed + " unit"
+            document.getElementById("coffeNeed").innerHTML = "Coffe need: "+coffeneed+" unit"
+            document.getElementById("waterNeed").innerHTML = "Water need: "+ waterneed+" unit"
+            $('#coffeNeeds').css('display', 'block');
+
+        }
+        else {
+            $('#coffeNeeds').css('display', 'none');
+        }
+
+    }
+</script>
+

@@ -17,9 +17,9 @@ namespace CoffeShop.Api.Controllers
         [HttpGet("getcoffes")]
         public IActionResult GetCoffes()
         {
-            //CoffeBussiness coffe = new CoffeBussiness();
-            //List<Coffe_CoffeSize_View> coffeList = coffe.GetCoffes();
-            return Ok();
+            CoffeBussiness coffe = new CoffeBussiness();
+            List<Coffe> coffeList = coffe.GetCoffes();
+            return Ok(coffeList);
         }
     }
 }

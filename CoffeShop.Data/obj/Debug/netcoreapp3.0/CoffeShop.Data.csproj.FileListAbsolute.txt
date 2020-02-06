@@ -1,5 +1,4 @@
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Data\bin\Debug\netcoreapp3.0\CoffeShop.Data.exe
-C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Data\obj\Debug\netcoreapp3.0\CoffeShop.Data.csprojAssemblyReference.cache
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Data\obj\Debug\netcoreapp3.0\CoffeShop.Data.AssemblyInfoInputs.cache
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Data\obj\Debug\netcoreapp3.0\CoffeShop.Data.AssemblyInfo.cs
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Data\bin\Debug\netcoreapp3.0\Microsoft.Bcl.AsyncInterfaces.dll
@@ -65,3 +64,4 @@ C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Data\bin\Debug\netcoreapp3
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Data\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Data\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Data\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
+C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Data\obj\Debug\netcoreapp3.0\CoffeShop.Data.csprojAssemblyReference.cache
