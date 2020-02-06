@@ -21,7 +21,7 @@
                 </div>
                 <div id="divCoffeSize">
                     @{
-                        await Html.PartialAsync("~/Views/Home/Partial/SizeDropDown.cshtml",new List<CoffeShop.Data.Models.ViewModel.Coffe_CoffeSize_View>());
+                        await Html.PartialAsync("~/Views/Home/Partial/SizeDropDown.cshtml", new List<CoffeShop.Data.Models.ViewModel.Coffe_CoffeSize_View>());
                     }
                 </div>
                 <div class="form-check">
@@ -36,8 +36,7 @@
                     <input type="checkbox" class="form-check-input" id="checkBoxWater">
                     <label class="form-check-label" for="checkBoxWater">Add extra one unite Water</label>
                 </div>
-                Total Price:<span id="priceLbl"><b>12 TL</b></span><br />
-                <button type="submit" class="btn btn-primary" style="margin-top:20px">Submit</button>
+                <input onclick="GetOrderDetail()"  class="btn btn-primary" style="margin-top:20px" value="Order Preview"/>
             </form>
         </div>
         <div class="col-md-4">
@@ -52,23 +51,79 @@
     </div>
 
 </div>
+<!-- Confirm Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Coffe Name: <b><span id="coffeNameSpn"></span></b><br />
+                Coffe Size: <b><span id="coffeSizeSpn"></span></b><br />
+                <hr />
+
+                Amount of coffe in Coffe: <b><span id="coffeAmountSpn"></span></b><br />
+                Amount of milk in Coffe: <b><span id="milkAmountSpn"></span></b><br />
+                Amount of water in Coffe: <b><span id="waterAmountSpn"></span></b><br />
+                <hr />
+
+                Extra coffe added: <b><span id="extraCoffeSpn"></span></b><br />
+                Extra milk added: <b><span id="extraMilkSpn"></span></b><br />
+                Extra water added: <b><span id="extrWaterSpn"></span></b><br />
+                <hr />
+
+                Total Price: <b><span id="totalPrice"></span></b>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success">Confirm Order</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Order</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Confirm Order</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
     function GetCoffeSizes() {
         let selectedValue = $('select[id=coffeDropDown]').val();
         $.ajax({
-                url : '/Home/GetCoffeSizes',
-                type: 'GET',
-                data: {
-                    coffeId: selectedValue
-                },
-                success: function (response) {
-                    let refreshDiv = document.getElementById("divCoffeSize")
-                    refreshDiv.innerHTML = response;
-                },
-                error: function (hata, ajaxOptions, thrownError) {
+            url: '/Home/GetCoffeSizes',
+            type: 'GET',
+            data: {
+                coffeId: selectedValue
+            },
+            success: function (response) {
+                let refreshDiv = document.getElementById("divCoffeSize")
+                refreshDiv.innerHTML = response;
+            },
+            error: function (hata, ajaxOptions, thrownError) {
 
-                }
-            });
+            }
+        });
     }
 
 
@@ -77,12 +132,10 @@
         let waterneed = $("#coffeSizeDropDown").find(':selected').attr('waterneed');
         let coffeneed = $("#coffeSizeDropDown").find(':selected').attr('coffeneed');
 
-                    debugger;
-
         if (milkneed != null) {
-            document.getElementById("milkNeed").innerHTML = "Milk need: " + milkneed + " unit"
-            document.getElementById("coffeNeed").innerHTML = "Coffe need: "+coffeneed+" unit"
-            document.getElementById("waterNeed").innerHTML = "Water need: "+ waterneed+" unit"
+            document.getElementById("milkNeed").innerHTML = "Milk need: <b>" + milkneed + " unit</b>"
+            document.getElementById("coffeNeed").innerHTML = "Coffe need: <b>" + coffeneed + " unit</b>"
+            document.getElementById("waterNeed").innerHTML = "Water need: <b>" + waterneed + " unit</b>"
             $('#coffeNeeds').css('display', 'block');
 
         }
@@ -90,6 +143,54 @@
             $('#coffeNeeds').css('display', 'none');
         }
 
+    }
+
+    function GetOrderDetail() {
+        let milkneed = $("#coffeSizeDropDown").find(':selected').attr('milkneed');
+        let waterneed = $("#coffeSizeDropDown").find(':selected').attr('waterneed');
+        let coffeneed = $("#coffeSizeDropDown").find(':selected').attr('coffeneed');
+
+        let milkcheck = document.getElementById("checkBoxMilk").checked
+        let coffecheck = document.getElementById("checkBoxCoffe").checked
+        let watercheck = document.getElementById("checkBoxWater").checked
+
+        $.ajax({
+            url: '/Home/GetOrderDetail',
+            type: 'GET',
+            data: {
+                milkNeed: parseFloat(milkneed.replace(',','.')).toFixed(2),
+                coffeNeed: parseFloat(coffeneed.replace(',','.')).toFixed(2),
+                waterNeed: parseFloat(waterneed.replace(',', '.')).toFixed(2),
+                milkCheck: milkcheck,
+                coffeCheck: coffecheck,
+                waterCheck: watercheck
+            },
+            success: function (response) {
+                debugger;
+                if (response.isOk) {
+                    document.getElementById("coffeNameSpn").textContent = $("#coffeDropDown option:selected").text();;
+                    document.getElementById("coffeSizeSpn").textContent = $("#coffeSizeDropDown option:selected").text();;
+
+                    document.getElementById("coffeAmountSpn").textContent = coffeneed;
+                    document.getElementById("milkAmountSpn").textContent= milkneed;
+                    document.getElementById("waterAmountSpn").textContent= waterneed;
+                    document.getElementById("totalPrice").textContent = response.extraData;
+
+                    document.getElementById("extraCoffeSpn").textContent= coffecheck;
+                    document.getElementById("extraMilkSpn").textContent= milkcheck;
+                    document.getElementById("extrWaterSpn").textContent = watercheck;
+
+                    $("#confirmModal").modal()
+                }
+                else {
+                    document.getElementById("warningModalBody").innerHTML = response.Message;
+                    $("#warningModal").modal()
+                }
+            },
+            error: function (hata, ajaxOptions, thrownError) {
+
+            }
+        });
     }
 </script>
 
