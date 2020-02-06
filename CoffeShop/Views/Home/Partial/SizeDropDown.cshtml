@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<CoffeShop.Data.Models.ViewModel.Coffe_CoffeSize_View>
+
+<div class="form-group">
+    <label for="coffeSizeDropDown">Coffe Size</label>
+    <select class="form-control" id="coffeSizeDropDown" onchange="UpdateNeeds()">
+        @{
+            if (Model.Count > 0)
+            {
+                <option value="0">Please select your coffe size</option>
+                foreach (var item in Model)
+                {
+                    <option value="@item.Id" milkneed="@item.MilkNeed" coffeneed="@item.CoffeNeed" waterneed="@item.WaterNeed">@item.Size</option>
+                }
+            }
+            else
+            {
+                <option value="0">Please first select your coffe</option>
+            }
+
+        }
+    </select>
+</div>
+<div id="coffeNeeds" style="display:none">
+    <small id="milkNeed"></small><br />
+    <small id="coffeNeed"></small><br />
+    <small id="waterNeed"></small><br />
+</div>

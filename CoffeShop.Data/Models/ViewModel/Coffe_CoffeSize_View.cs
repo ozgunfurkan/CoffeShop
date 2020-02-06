@@ -7,23 +7,15 @@ namespace CoffeShop.Data.Models.ViewModel
     public class Coffe_CoffeSize_View
     {
         public int Id { get; set; }
-        public string Name { get; set; }
 
-        public List<CoffeSizeView> CoffeSizeList { get; set; }
+        public int CoffeId { get; set; }
 
-    }
-
-    public class CoffeSizeView
-    {
+        public int CoffeSizeId { get; set; }
         public string Size { get; set; }
-        public CoffeNeeds CoffeNeedsList{get;set;}
-    }
 
-    public class CoffeNeeds
-    {
-        public string WaterNeed { get; set; }
-        public string MilkNeed { get; set; }
-        public string CoffeNeed { get; set; }
-    }
+        public decimal CoffeNeed { get; set; }
+        public decimal WaterNeed { get; set; }
+        public decimal MilkNeed { get; set; }
 
+    }
 }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CoffeShop.Models;
+using CoffeShop.ServiceHelpers;
+using CoffeShop.Data.Models.DataModels;
+using CoffeShop.Data.Models.ViewModel;
 
 namespace CoffeShop.Controllers
 {
@@ -18,9 +21,18 @@ namespace CoffeShop.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            CoffeServiceHelper coffeService = new CoffeServiceHelper();
+            List<Coffe> coffeList = await coffeService.GetCoffesAsync();
+            return View(coffeList);
+        }
+
+        public async Task<IActionResult> GetCoffeSizes(int coffeId)
+        {
+            Coffe_CoffeSize_MappingServiceHelper coffe_CoffeSize = new Coffe_CoffeSize_MappingServiceHelper();
+            List<Coffe_CoffeSize_View> coffeList = await coffe_CoffeSize.GetCoffeSizesAsync(coffeId);
+            return PartialView("~/Views/Home/Partial/SizeDropDown.cshtml", coffeList);
         }
 
         public IActionResult Privacy()

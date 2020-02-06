@@ -104,7 +104,6 @@ C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Api\bin\Debug\netcoreapp3.
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Api\bin\Debug\netcoreapp3.0\CoffeShop.Api.runtimeconfig.dev.json
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Api\bin\Debug\netcoreapp3.0\CoffeShop.Api.dll
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Api\bin\Debug\netcoreapp3.0\CoffeShop.Api.pdb
-C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Api\obj\Debug\netcoreapp3.0\CoffeShop.Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Api\obj\Debug\netcoreapp3.0\CoffeShop.Api.dll
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Api\obj\Debug\netcoreapp3.0\CoffeShop.Api.pdb
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Api\bin\Debug\netcoreapp3.0\CoffeShop.Bussiness.exe
@@ -150,3 +149,5 @@ C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Api\bin\Debug\netcoreapp3.
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Api\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Api\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Api\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
+C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Api\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\ozgunfurkan\source\repos\CoffeShop\CoffeShop.Api\obj\Debug\netcoreapp3.0\CoffeShop.Api.MvcApplicationPartsAssemblyInfo.cache
