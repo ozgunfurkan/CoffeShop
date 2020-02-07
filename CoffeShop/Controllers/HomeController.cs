@@ -25,6 +25,14 @@ namespace CoffeShop.Controllers
         {
             CoffeServiceHelper coffeService = new CoffeServiceHelper();
             List<Coffe> coffeList = await coffeService.GetCoffesAsync();
+
+            ComponentServiceHelper componentService = new ComponentServiceHelper();
+            List<Component> componentList = await componentService.GetStockDataAsync();
+
+            ViewBag.CoffeInStock = componentList[0].Stock;
+            ViewBag.MilkInStock = componentList[1].Stock;
+            ViewBag.WaterInStock = componentList[2].Stock;
+
             return View(coffeList);
         }
 
