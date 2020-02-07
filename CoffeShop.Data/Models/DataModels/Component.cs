@@ -12,7 +12,7 @@ namespace CoffeShop.Data.Models.DataModels
         public string ComponentName { get; set; }
 
         public decimal UnitPrice { get; set; }
-        public int Stock { get; set; }
+        public decimal Stock { get; set; }
 
     }
 }

@@ -43,6 +43,14 @@ namespace CoffeShop.Controllers
             return Json(response);
         }
 
+        public async Task<IActionResult> ConfirmOrder(decimal milkNeed,
+            decimal coffeNeed, decimal waterNeed, bool milkCheck, bool coffeCheck, bool waterCheck)
+        {
+            ComponentServiceHelper componentService = new ComponentServiceHelper();
+            var response = await componentService.ConfirmOrderAsync(milkNeed, coffeNeed, waterNeed, milkCheck, coffeCheck, waterCheck);
+            return Json(response);
+        }
+
         public IActionResult Privacy()
         {
             return View();
