@@ -43,9 +43,9 @@
 
         </div>
         <div class="col-md-4">
-            Coffe in stock:<span id="amountOfCoffeInStockSpn"><b>@ViewBag.CoffeInStock</b></span><br />
-            Milk in stock:<span id="amountOfMilkInStockSpn"><b>@ViewBag.MilkInStock</b></span><br />
-            Water in stock:<span id="amountOfWaterInStockSpn"><b>@ViewBag.WaterInStock</b></span><br />
+            Coffe in stock: <b id="amountOfCoffeInStockSpn">@ViewBag.CoffeInStock</b><br />
+            Milk in stock: <b id="amountOfMilkInStockSpn">@ViewBag.MilkInStock</b><br />
+            Water in stock: <b id="amountOfWaterInStockSpn">@ViewBag.WaterInStock</b><br />
 
         </div>
     </div>
@@ -96,7 +96,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <span id="warningMsgSpn"></span></b><br />
+                <b><span id="warningMsgSpn"></span></b><br />
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -237,10 +237,7 @@
                 document.getElementById("amountOfCoffeInStockSpn").textContent = response.coffeInStock;
                 document.getElementById("amountOfMilkInStockSpn").textContent = response.milkInStock;
                 document.getElementById("amountOfWaterInStockSpn").textContent = response.waterInStock;
-                $("#confirmModal").hide()
-                $("#successModal").modal()
-                $('body').removeClass('modal-open');
-                $('.modal-backdrop').remove();
+                $('#confirmModal').modal('hide');
                 $("#successModal").modal()
 
             },
