@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CoffeShop.Bussiness.Bussiness;
+using CoffeShop.Data.Models.DataModels;
 using CoffeShop.Data.Models.GeneralModels;
 using CoffeShop.Data.Models.RequestModels;
 using CoffeShop.Data.Models.ViewModel;
@@ -29,6 +30,14 @@ namespace CoffeShop.Api.Controllers
             ComponentBussiness component = new ComponentBussiness();
             ComponentStocks componentStocks = component.ConfirmOrder(componentUpdate);
             return Ok(componentStocks);
+        }
+
+        [HttpGet("getstockdata")]
+        public IActionResult GetStockData()
+        {
+            ComponentBussiness component = new ComponentBussiness();
+            List<Component> componentList = component.GetStockData();
+            return Ok(componentList);
         }
     }
 }

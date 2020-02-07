@@ -1,4 +1,5 @@
-﻿using CoffeShop.Data.Models.GeneralModels;
+﻿using CoffeShop.Data.Models.DataModels;
+using CoffeShop.Data.Models.GeneralModels;
 using CoffeShop.Data.Models.RequestModels;
 using CoffeShop.Data.Models.ViewModel;
 using Newtonsoft.Json;
@@ -39,6 +40,15 @@ namespace CoffeShop.ServiceHelpers
             var returnResult = await httpClient.PutAsync(servicePath.ServiceURL + "component/confirmorder", new StringContent(serialazeJSON, Encoding.UTF8, "application/json"));
             var contents = await returnResult.Content.ReadAsStringAsync();
             ComponentStocks response = JsonConvert.DeserializeObject<ComponentStocks>(contents);
+            return response;
+        }
+
+        public async Task<List<Component>> GetStockDataAsync()
+        {
+            var httpClient = new HttpClient();
+            var servicePath = new ServicePath();
+            var getResponse = await httpClient.GetStringAsync(new Uri(string.Format(servicePath.ServiceURL + "component/getstockdata")));
+            var response = JsonConvert.DeserializeObject<List<Component>>(getResponse);
             return response;
         }
     }

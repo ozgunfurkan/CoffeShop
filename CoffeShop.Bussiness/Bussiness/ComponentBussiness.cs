@@ -77,5 +77,14 @@ namespace CoffeShop.Bussiness.Bussiness
                 return componentStocks;
             }
         }
+
+        public List<Component> GetStockData()
+        {
+            using (var ctx = new CoffeShopContext())
+            {
+                List<Component> componentList = ctx.Components.ToList();
+                return componentList;
+            }
+        }
     }
 }
