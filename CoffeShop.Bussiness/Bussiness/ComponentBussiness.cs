@@ -2,6 +2,8 @@
 using CoffeShop.Data;
 using CoffeShop.Data.Models.DataModels;
 using CoffeShop.Data.Models.GeneralModels;
+using CoffeShop.Data.Models.RequestModels;
+using CoffeShop.Data.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,7 @@ namespace CoffeShop.Bussiness.Bussiness
             using (var ctx = new CoffeShopContext())
             {
                 List<Component> componentList = ctx.Components.ToList();
-                var checkStocksAreValid = componentHelper.CheckStocksAreValid(milkneed, coffeneed, waterneed, componentList);
+                var checkStocksAreValid = componentHelper.CheckStocksAreValid(milkneed, coffeneed, waterneed, componentList,milkCheck,coffeCheck,waterCheck);
                 if(checkStocksAreValid.IsOk)
                 {
                     decimal price = componentHelper.CalculatePrice(milkneed, coffeneed, waterneed, componentList);
@@ -44,6 +46,35 @@ namespace CoffeShop.Bussiness.Bussiness
                 }
 
                 return checkStocksAreValid;
+            }
+        }
+
+        public ComponentStocks ConfirmOrder(ComponentUpdate componentUpdate)
+        {
+            ComponentHelper componentHelper = new ComponentHelper();
+            using (var ctx = new CoffeShopContext())
+            {
+                List<Component> componentList = ctx.Components.ToList();
+                var componentStocks = componentHelper.CalculateNewStocks(componentUpdate,componentList);
+
+                for(int i=0;i<componentList.Count;i++)
+                {
+                    if (componentList[i].ComponentName == "Milk")
+                    {
+                        componentList[i].Stock = componentStocks.MilkInStock;
+                    }
+                    else if (componentList[i].ComponentName == "Coffe")
+                    {
+                        componentList[i].Stock = componentStocks.CoffeInStock;
+                    }
+                    else if (componentList[i].ComponentName == "Water")
+                    {
+                        componentList[i].Stock = componentStocks.WaterInStock;
+                    }
+                }
+
+                ctx.SaveChanges();
+                return componentStocks;
             }
         }
     }
