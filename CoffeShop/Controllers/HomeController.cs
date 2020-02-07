@@ -30,8 +30,15 @@ namespace CoffeShop.Controllers
             List<Component> componentList = await componentService.GetStockDataAsync();
 
             ViewBag.CoffeInStock = componentList[0].Stock;
+            ViewBag.CoffeUnitPrice = componentList[0].UnitPrice;
+
             ViewBag.MilkInStock = componentList[1].Stock;
+            ViewBag.MilkUnitPrice = componentList[1].UnitPrice;
+
             ViewBag.WaterInStock = componentList[2].Stock;
+            ViewBag.WaterUnitPrice = componentList[2].UnitPrice;
+
+
 
             return View(coffeList);
         }
